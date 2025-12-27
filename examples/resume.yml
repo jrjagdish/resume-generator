@@ -1,0 +1,52 @@
+personal_info:
+  full_name: Jagdish Kumar            # REQUIRED
+  email: jagdish@example.com          # REQUIRED
+  phone: "+91-XXXXXXXXXX"              # OPTIONAL
+  location: India                     # OPTIONAL
+  github: https://github.com/jagdish   # OPTIONAL
+  linkedin: https://linkedin.com/in/jagdish  # OPTIONAL
+  website: null                       # OPTIONAL
+  summary: Backend developer focused on APIs and system design.  # REQUIRED
+
+skills:
+  - Python
+  - Go
+  - FastAPI
+  - Django
+  - PostgreSQL
+
+experience:                             # OPTIONAL (can be empty or omitted)
+  - company: ABC Tech
+    role: Backend Intern
+    start_date: 2024-01
+    end_date: 2024-06
+    description:
+      - Built REST APIs using FastAPI
+      - Improved response time by 30%
+    technologies:
+      - Python
+      - PostgreSQL
+
+projects:                               # OPTIONAL but recommended
+  - title: Resume Generator API
+    description:
+      - Converts JSON/YAML into professional PDF resumes
+      - Supports multiple templates and export formats
+    technologies:
+      - FastAPI
+      - Jinja2
+      - PDFKit
+    link: https://github.com/jagdish/resume-api
+
+education:                              # REQUIRED (at least one)
+  - institution: XYZ University
+    degree: BCA
+    start_year: 2022
+    end_year: 2025
+
+certifications: []                      # OPTIONAL
+achievements: []                        # OPTIONAL
+
+meta:
+  template: minimal                    # REQUIRED
+  language: en                         # OPTIONAL
