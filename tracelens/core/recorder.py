@@ -1,14 +1,14 @@
 import time
 from typing import Optional
-from app.core.config import TranceLensConfig
-from app.logging.writer import LogWriter
+from tracelens.core.config.model import TraceLensConfig
+from tracelens.logging.writer import LogWriter
 
 class Recorder:
-    def __init__(self,config:TranceLensConfig,log_writer:LogWriter):
+    def __init__(self,config:TraceLensConfig,log_writer:LogWriter):
         self._config = config
         self._log_writer = log_writer
 
-    def satart_timer(self)->float:
+    def start_timer(self)->float:
         """Start a timer and return the start time."""
         return time.perf_counter()
 
@@ -33,7 +33,7 @@ class Recorder:
             "status_code":status_code,
             "latency_ms":latency_ms,
             "method":method,
-            "error":bool(is_error),
+            "error":error,
         }
         self._log_writer.write_logs(record)
         

@@ -2,21 +2,22 @@ from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.types import ASGIApp
 
-from app.logging.writer import LogWriter
-from app.core.recorder import Recorder
-from app.core.config import TranceLensConfig
-from app.core.hasher import hash_endpoint
+from tracelens.logging.writer import LogWriter
+from tracelens.core.recorder import Recorder
+from tracelens.core.config.model import TraceLensConfig
+from tracelens.core.hasher import hash_endpoint
+from tracelens.logging.writer import LogWriter
 
-class FastAPIMiddleware(BaseHTTPMiddleware):
+class TraceLensMiddleware(BaseHTTPMiddleware):
     def __init__(
         self,
         app: ASGIApp,
-        config: TranceLensConfig,
+        config: TraceLensConfig,
         writer: LogWriter | None = None,
     ):
         super().__init__(app)
         self._config = config
-        self._writer = writer or LogWriter()
+        self._writer = writer or LogWriter(config)
         self._recorder = Recorder(config, self._writer)
 
     async def dispatch(self, request: Request, call_next):
@@ -30,7 +31,7 @@ class FastAPIMiddleware(BaseHTTPMiddleware):
 
         try:
             response = await call_next(request)
-            return response
+            
 
         except Exception as exc:
             error = exc
@@ -54,5 +55,7 @@ class FastAPIMiddleware(BaseHTTPMiddleware):
                     error=str(error) if error else None,
                 )
 
-            except Exception:
-                pass
+            except Exception as e:
+                return
+            
+            return response

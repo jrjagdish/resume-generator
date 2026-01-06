@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tracelens"
+version = "0.1.0"
+description = "Local-first API observability toolkit"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.100",
+    "typer>=0.9",
+    "rich>=10.11"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tracelens*"]
